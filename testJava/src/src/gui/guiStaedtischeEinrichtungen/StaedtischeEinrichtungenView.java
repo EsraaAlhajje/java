@@ -1,6 +1,7 @@
 package gui.guiStaedtischeEinrichtungen;
 
 import business.BuergeraemterModel;
+import business.Buergeramt;
 import gui.guiBuergeraemter.BuergeraemterControl;
 import javafx.event.*;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import ownUtil.*;
 
 public class StaedtischeEinrichtungenView {
 	
-	
+	//Hier ergaenzen
 		
 		private BuergeraemterModel buergeraemterModel;
 		private StaedtischeEinrichtungenControl staedtischeEinrichtungenControl;
@@ -21,7 +22,7 @@ public class StaedtischeEinrichtungenView {
 	
     	
     	private Pane pane = new  Pane();
-    	private Label lblAnzeigeBuergeraeamter = new Label("Anzeige Bürgerämter");
+    	private Label lblAnzeigeBuergeraeamter = new Label("Anzeige Bï¿½rgerï¿½mter");
     	private TextArea txtAnzeigeBuergeraeamter  = new TextArea();
     	private Button btnAnzeigeBuergeraeamter = new Button("Anzeige");
     	
@@ -30,7 +31,7 @@ public class StaedtischeEinrichtungenView {
     		BuergeraemterModel buergeraemterModel){
     		Scene scene = new Scene(this.pane, 560, 340);
     		primaryStage.setScene(scene);
-    		primaryStage.setTitle("Anzeige von städtischen " + "Einrichtungen");
+    		primaryStage.setTitle("Anzeige von stï¿½dtischen " + "Einrichtungen");
     		primaryStage.show();
     		this.staedtischeEinrichtungenControl = staedtischeEinrichtungenControl;
         	this.buergeraemterModel = buergeraemterModel;
@@ -72,14 +73,25 @@ public class StaedtischeEinrichtungenView {
     }
    
     public void zeigeBuergeraemterAn(){
+    	      /*                                   //.size()>0
     		if(buergeraemterModel.getBuergeramt() != null){
+    			
+    			//text
+    			//
     			txtAnzeigeBuergeraeamter.setText(
     				buergeraemterModel.getBuergeramt()
  				.gibBuergeramtZurueck(' '));
-    		}
+    		}*/
+    	if (buergeraemterModel.getBuergeraemterList().size()>0) {
+    		StringBuffer text = new StringBuffer();            
+    		for (Buergeramt buergeramt : buergeraemterModel.getBuergeraemterList()) {
+           text.append(buergeramt.gibBuergeramtZurueck(' ')).append("\n");
+       }
+    		txtAnzeigeBuergeraeamter.setText(text.toString());
+    }
     		else{
     			zeigeInformationsfensterAn(
- 				"Bisher wurde kein Bürgeramt aufgenommen!");
+ 				"Bisher wurde kein Buergeramt aufgenommen!");
     		}
     }	
    
@@ -88,5 +100,33 @@ public class StaedtischeEinrichtungenView {
     }	
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+if (buergeraemterModel.getBuergeraemterList().size()>0) {
+		StringBuffer text = new StringBuffer();            
+		for (Buergeramt buergeramt : buergeraemterModel.getBuergeraemterList()) {
+       text.append(buergeramt.gibBuergeramtZurueck(' ')).append("\n");
+   }
+		txtAnzeigeBuergeraeamter.setText(text.toString());
+}
+*/
 
 
